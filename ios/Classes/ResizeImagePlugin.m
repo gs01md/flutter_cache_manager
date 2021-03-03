@@ -18,7 +18,8 @@
           NSDictionary* params = (NSDictionary *)call.arguments;
     //      NSLog(@"%@", params);
           NSString* imagePath = [params objectForKey:@"imagePath"];
-          if(imagePath == nil){
+          NSString* url = params objectForKey:@"url"];
+          if(imagePath == nil || url == nil){
               result(@{@"res":@"error"});
           }
           
@@ -26,10 +27,9 @@
           if(image == nil){
               result(@{@"res":@"error"});
           }
-          
-    #define MAX_IMAGE_WIDTH 2480
-    #define MAX_IMAGE_HEIGHT 2480
-          if((image.size.width > MAX_IMAGE_WIDTH) || (image.size.height > MAX_IMAGE_HEIGHT)){
+        #define MAX_IMAGE_WIDTH(url) ([url containsString:@"https://cdn.lingoace.com/avatar"] ? 414 : 2480)
+        #define MAX_IMAGE_HEIGHT(url) ([url containsString:@"https://cdn.lingoace.com/avatar"] ? 414 : 2480)
+            if((image.size.width > MAX_IMAGE_WIDTH(url)) || (image.size.height > MAX_IMAGE_HEIGHT(url))){
               CGFloat scale = 1.0;
               scale = MIN(MAX_IMAGE_WIDTH / image.size.width, MAX_IMAGE_HEIGHT / image.size.height) ;
               CGSize size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(scale, scale));
