@@ -18,7 +18,7 @@ import 'package:uuid/uuid.dart';
 ///Released under MIT License.
 
 class DefaultCacheManager extends BaseCacheManager {
-  static const key = "libCachedImageData";
+  static const key = "libCachedImageDataNew";
 
   static DefaultCacheManager _instance;
 
