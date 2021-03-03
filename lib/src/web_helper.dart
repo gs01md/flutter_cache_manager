@@ -104,7 +104,7 @@ class WebHelper {
 
       if(Platform.isIOS){
         MethodChannel _channel = MethodChannel('resizeImage/plugin');
-        await _channel.invokeMapMethod("resizeImage",{'imagePath':filePath});
+        await _channel.invokeMapMethod("resizeImage",{'imagePath':filePath, 'url':cacheObject.url});
       }
       return true;
     }
