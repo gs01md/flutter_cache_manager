@@ -9,7 +9,10 @@ environment:
 
 flutter:
   plugin:
-    pluginClass: ResizeImagePlugin
+    platforms:
+      ios:
+        pluginClass: ResizeImagePlugin
+
 dependencies:
   flutter:
     sdk: flutter
