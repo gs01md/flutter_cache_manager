@@ -7,6 +7,9 @@ homepage: https://github.com/renefloor/flutter_cache_manager
 environment:
   sdk: ">=2.0.0-dev.28.0 <3.0.0"
 
+flutter:
+  plugin:
+    pluginClass: ResizeImagePlugin
 dependencies:
   flutter:
     sdk: flutter
