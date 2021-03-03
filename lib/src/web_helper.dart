@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/src/cache_object.dart';
 import 'package:flutter_cache_manager/src/cache_store.dart';
 import 'package:flutter_cache_manager/src/file_fetcher.dart';
@@ -98,7 +99,13 @@ class WebHelper {
       if (!(await folder.exists())) {
         folder.createSync(recursive: true);
       }
-      await new File(path).writeAsBytes(response.bodyBytes);
+      var filePath = p.join(await _store.filePath, cacheObject.relativePath);
+      await new File(filePath).writeAsBytes(response.bodyBytes);
+
+      if(Platform.isIOS){
+        MethodChannel _channel = MethodChannel('resizeImage/plugin');
+        await _channel.invokeMapMethod("resizeImage",{'imagePath':filePath});
+      }
       return true;
     }
     if (response.statusCode == 304) {
